@@ -29,20 +29,24 @@ namespace RumeLab::Detail
             pinMode(SW_PIN, INPUT_PULLUP);
         }
 
-        auto process() -> void
+        auto process() -> int8_t
         {
             const PinStatus current_clk_pin_state = digitalRead(CLK_PIN);
             const bool is_rotated = current_clk_pin_state != previous_clk_pin_state;
             previous_clk_pin_state = current_clk_pin_state;
 
             if (!is_rotated)
-                return;
+                return 0;
 
             const bool is_clockwise_rotation = digitalRead(DT_PIN) != current_clk_pin_state;
             if (is_clockwise_rotation)
+            {
                 ++rotation;
-            else
-                --rotation;
+                return 1;
+            }
+
+            --rotation;
+            return -1;
         }
 
         auto get_rotation() const -> int16_t
