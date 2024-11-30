@@ -22,6 +22,18 @@ void loop()
     const int16_t rotation = input_device.get_rotation();
     const bool pressed = input_device.is_pressed();
 
+    if (input_device.is_just_pressed())
+    {
+        Serial.print("Just pressed!");
+        return;
+    }
+
+    if (input_device.is_just_released())
+    {
+        Serial.print("Just released!");
+        return;
+    }
+
     Serial.print("Rotation: ");
     Serial.print(rotation);
     Serial.print("; Pressed: ");

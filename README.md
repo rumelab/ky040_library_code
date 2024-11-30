@@ -28,15 +28,7 @@ void setup()
 
 void loop()
 {
-    int8_t step = input_device.process();
-    if(step > 0) {
-        // Rotated clockwise.
-    } else if (step < 0) {
-        // Rotated anticlockwise.
-    } else {
-        // Did not rotate.
-    }
-
+    input_device.process();
     const int16_t rotation = input_device.get_rotation();
     const bool pressed = input_device.is_pressed();
 
